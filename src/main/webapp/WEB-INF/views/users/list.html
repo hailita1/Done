@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link href="/styles/style.css" th:href="@{/styles/style.css}" rel="stylesheet">
+    <style>
+        table {
+            width: 85%;
+            margin: auto;
+            background: rgba(19, 35, 47, 0.9);
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+            color: white;
+
+        }
+
+        th {
+            background-color: #1ab188;
+            padding: 10px;
+            text-transform: capitalize;
+            font-size: 18px;
+
+        }
+
+        td {
+            border: 1px solid #ffffff80;
+            padding: 10px;
+        }
+
+        a {
+            padding: 15px 15px;
+            color: #2196f3;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 800;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        a:hover {
+            color: #255784;
+            background: #2196f3;
+            box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+        }
+
+
+        tr:hover {
+            background: url(https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-nen-messi-dep-nhat.jpg);
+            font-family: 'Titillium Web', sans-serif;
+            background-size: 100%;
+        }
+
+        body {
+            background: linear-gradient(to right, #1fddff, #ff4b1f);
+            font-family: 'Titillium Web', sans-serif;
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Chango';
+            font-size: 72px;
+            background: -webkit-linear-gradient(#4a00ff, #d01919);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        img {
+            border-radius: 50% 10%;
+            height: 200px;
+            margin-left: 11px;
+            margin-top: 7px;
+        }
+
+        .headshot {
+            flex-shrink: 0;
+            margin: 20px;
+
+            width: calc(150px + 7vw);
+
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            background-size: cover;
+            box-sizing: border-box;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .headshot-1 {
+            border-radius: 50% 10%;
+            background-image: linear-gradient(#24d9f9, #f65128);
+        }
+
+        .headshot {
+            display: inline-block;
+            border: 0;
+            position: relative;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+
+        }
+
+        .headshot:hover {
+            z-index: 2;
+            -webkit-transition: all 200ms ease-in;
+            transform: scale(1.3);
+            margin-left: 38px;
+        }
+    </style>
+
+</head>
+<body>
+<h1 class="title" style="text-align: center">Users List</h1>
+<div>
+    <p style="text-align: center">
+        <a style="color: black" href="/users//create"> Create New User ?</a>
+    </p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>D-o-B</th>
+            <th>Phone - Number</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <th:block th:each="user : ${users}">
+            <tr>
+
+                <td><a th:href="@{/users/view/__${user.id}__}" th:text="${user.name}"></a></td>
+                <td>
+                    <div class="headshot headshot-1"><img width="250px" height="150" th:src="@{'/img/' + ${user.img}}">
+                    </div>
+                </td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.address}"></td>
+                <td th:text="${user.doB}"></td>
+                <td th:text="${user.phone}"></td>
+                <td><a th:href="@{/users/edit/__${user.id}__ }">Edit</a></td>
+                <td><a th:href="@{/users/delete/__${user.id}__ }">Delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+</body>
+</html>
